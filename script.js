@@ -19,6 +19,7 @@ const clear = async () => {
   countriesContainer = document.querySelector('.countries');
   const btn = document.querySelector('.btn-country');
   btn.addEventListener('click', whereAmI);
+  console.log('cleared');
 };
 
 const renderCountry = function (data, city = '') {
@@ -33,7 +34,7 @@ const renderCountry = function (data, city = '') {
             <p class="country__row"><span>📍</span>${city}</p>
             <p class="country__row"><span>👫</span>${(
               data.population / 1000000
-            ).toFixed(1)} people</p>
+            ).toFixed(1)}M people</p>
             <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
             <p class="country__row"><span>💰</span>${
               data.currencies[0].code
