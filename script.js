@@ -1,13 +1,28 @@
 'use strict';
 
-const btn = document.querySelector('.btn-country');
-const countriesContainer = document.querySelector('.countries');
+let countriesContainer;
 
 const renderError = function (msg) {
   countriesContainer.insertAdjacentText('beforeend', msg);
 };
 
+const clear = async () => {
+  document.body.innerHTML = '';
+  document.body.insertAdjacentHTML(
+    'beforeend',
+    '<main class="container">    <div class="countries"></div></main>'
+  );
+  document.body.insertAdjacentHTML(
+    'beforeend',
+    '<button class="btn-country">Where am I?</button>'
+  );
+  countriesContainer = document.querySelector('.countries');
+  const btn = document.querySelector('.btn-country');
+  btn.addEventListener('click', whereAmI);
+};
+
 const renderCountry = function (data, city = '') {
+  clear();
   const header = '<h1 class = "heading-primary">Here you are!</h1>';
   const html = `
   <article class="country">
@@ -28,7 +43,6 @@ const renderCountry = function (data, city = '') {
   `;
   document.body.insertAdjacentHTML('afterbegin', header);
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
 };
 
 const getPosition = function () {
@@ -58,4 +72,4 @@ const whereAmI = async function () {
   console.log(data[0]);
 };
 
-btn.addEventListener('click', whereAmI);
+clear();
